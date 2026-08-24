@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Админка кряков</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body style="padding:40px;">
+  <h1>🔧 Добавить игру</h1>
+  <form id="addForm">
+    <input type="text" id="title" placeholder="Название игры" required><br>
+    <input type="text" id="desc" placeholder="Описание"><br>
+    <input type="text" id="cover" placeholder="Путь к обложке (например, games/xxx/cover.jpg)"><br>
+    <input type="text" id="download" placeholder="Ссылка на скачивание" required><br>
+    <input type="text" id="size" placeholder="Размер (например, 50 GB)"><br>
+    <button type="submit">Сгенерировать запись</button>
+  </form>
+  <div id="output" style="margin-top:30px; background:#111; padding:20px; border:1px solid #0f0; white-space:pre-wrap;"></div>
+  <script>
+    document.getElementById('addForm').onsubmit = function(e) {
+      e.preventDefault();
+      const title = document.getElementById('title').value;
+      const desc = document.getElementById('desc').value;
+      const cover = document.getElementById('cover').value;
+      const download = document.getElementById('download').value;
+      const size = document.getElementById('size').value;
+      const entry = `  {\n    "id": "${title.toLowerCase().replace(/ /g,'_')}",\n    "title": "${title}",\n    "cover": "${cover || 'games/default.jpg'}",\n    "desc": "${desc || 'Без описания'}",\n    "download": "${download}",\n    "size": "${size || 'N/A'}"\n  }`;
+      document.getElementById('output').textContent = entry;
+    };
+  </script>
+</body>
+</html>
